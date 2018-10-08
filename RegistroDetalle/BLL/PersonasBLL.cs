@@ -85,3 +85,38 @@ namespace ResgistroDetalle.BLL
 
     }
 }
+
+public static Persona Buscar (int id)
+{
+    Contexto = new Contexto();
+    Persona persona = new Persona();
+    try
+    {
+        persona = Contexto.Persona.Find(id);
+        persona.DetallesTel.Count();
+    }
+    catch (Exception)
+    { throw; }
+    finally
+    { Contexto.Dispose(); }
+    return persona;
+}
+
+public static List<Persona> GetList(Expression<Func<Persona, bool>>persona)
+{
+    List<Persona> Lista = new List<Persona>();
+    Contexto contexto = new Contexto();
+    try
+    {
+        Lista = Contexto.Persona.Where(persona).ToList();
+    }
+    catch (Exception)
+    {
+        throw;
+    }
+    finally
+    {
+        Contexto.Dispose();
+    }
+    return Lista;
+}
